@@ -1,0 +1,54 @@
+/*
+ * Design tokens for the booking widget, shared by every distribution
+ * (this React package today, the framework-agnostic embed later).
+ * Namespaced with a `--pbw-` prefix so dropping this into an arbitrary
+ * host page's CSS never collides with the host's own custom properties.
+ *
+ * Visual direction: the neutral, single-accent-color language used by
+ * Cal.com and Calendly — white surfaces, gray text hierarchy, one brand
+ * color, generous spacing, a real calendar grid rather than a flat list
+ * of dates. Every value below is meant to be overridden by whoever
+ * embeds this (agency client theming, or a third-party developer's own
+ * brand) — that's the whole point of exposing them as custom properties
+ * instead of baking colors into the component.
+ */
+:root,
+:host,
+.pbw-root {
+  --pbw-color-bg: #ffffff;
+  --pbw-color-surface: #ffffff;
+  --pbw-color-surface-muted: #f9fafb;
+  --pbw-color-border: #e5e7eb;
+  --pbw-color-border-strong: #d1d5db;
+  --pbw-color-text: #111827;
+  --pbw-color-text-muted: #6b7280;
+  --pbw-color-text-faint: #9ca3af;
+
+  --pbw-color-accent: #2563eb;
+  --pbw-color-accent-hover: #1d4ed8;
+  --pbw-color-accent-contrast: #ffffff;
+  --pbw-color-accent-soft: #eff6ff;
+
+  --pbw-color-danger: #dc2626;
+  --pbw-color-danger-soft: #fef2f2;
+  --pbw-color-success: #059669;
+  --pbw-color-success-soft: #ecfdf5;
+
+  --pbw-radius-sm: 6px;
+  --pbw-radius-md: 8px;
+  --pbw-radius-lg: 16px;
+  --pbw-radius-full: 999px;
+
+  --pbw-shadow-card: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
+  --pbw-shadow-hover: 0 4px 12px rgba(16, 24, 40, 0.08);
+
+  --pbw-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --pbw-space-1: 4px;
+  --pbw-space-2: 8px;
+  --pbw-space-3: 12px;
+  --pbw-space-4: 16px;
+  --pbw-space-5: 20px;
+  --pbw-space-6: 24px;
+  --pbw-space-8: 32px;
+}

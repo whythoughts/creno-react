@@ -1,0 +1,323 @@
+/*
+ * Deliberately does NOT @import tokens.css or rely on a `:host`/`:root`
+ * block declaring these variables. Every var() below carries its own
+ * fallback default instead, so this file is fully self-sufficient.
+ *
+ * Why: inside a Shadow DOM (the embed-widget distribution), an internal
+ * `:host { --pbw-color-accent: ... }` declaration and a host page's own
+ * `creno-widget { --pbw-color-accent: ... }` override both
+ * target the same element, and getting that cascade to reliably favor the
+ * host page's override turned out to be inconsistent. Inline fallbacks
+ * sidestep the question entirely: nothing here ever *declares* a value to
+ * be overridden, so real CSS custom-property inheritance (which does cross
+ * shadow boundaries) is simply the only source of truth, and the fallback
+ * only kicks in when nothing upstream set it.
+ *
+ * tokens.css still exists and is still imported by React consumers who
+ * want centrally-declared tokens (e.g. sharing one theme across several
+ * components) — it's just no longer required for this file to work.
+ */
+
+.pbw-root {
+  width: 100%;
+  font-family: var(--pbw-font, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
+  color: var(--pbw-color-text, #111827);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+.pbw-root *,
+.pbw-root *::before,
+.pbw-root *::after {
+  box-sizing: border-box;
+}
+
+.pbw-card {
+  width: 100%;
+  background: var(--pbw-color-surface, #ffffff);
+  border: 1px solid var(--pbw-color-border, #e5e7eb);
+  border-radius: var(--pbw-radius-lg, 16px);
+  box-shadow: var(--pbw-shadow-card, 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04));
+  padding: var(--pbw-space-6, 24px);
+  max-width: 720px;
+  box-sizing: border-box;
+}
+
+.pbw-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 var(--pbw-space-4, 16px);
+  color: var(--pbw-color-text, #111827);
+}
+
+.pbw-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: var(--pbw-space-4, 16px);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--pbw-color-text-muted, #6b7280);
+  cursor: pointer;
+}
+.pbw-back:hover {
+  color: var(--pbw-color-text, #111827);
+}
+
+/* --- Service picker --- */
+.pbw-service-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pbw-space-2, 8px);
+}
+.pbw-service-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--pbw-space-4, 16px);
+  border: 1px solid var(--pbw-color-border, #e5e7eb);
+  border-radius: var(--pbw-radius-md, 8px);
+  background: var(--pbw-color-surface, #ffffff);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--pbw-color-text, #111827);
+  cursor: pointer;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+.pbw-service-option:hover {
+  border-color: var(--pbw-color-accent, #2563eb);
+  background: var(--pbw-color-accent-soft, #eff6ff);
+}
+
+/* --- Date + time step --- */
+.pbw-datetime {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--pbw-space-6, 24px);
+}
+@media (min-width: 640px) {
+  .pbw-datetime {
+    grid-template-columns: 1.1fr 1fr;
+  }
+}
+
+.pbw-calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--pbw-space-3, 12px);
+}
+.pbw-calendar-nav-label {
+  font-size: 14px;
+  font-weight: 600;
+}
+.pbw-calendar-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--pbw-color-border, #e5e7eb);
+  border-radius: var(--pbw-radius-sm, 6px);
+  background: var(--pbw-color-surface, #ffffff);
+  color: var(--pbw-color-text-muted, #6b7280);
+  cursor: pointer;
+}
+.pbw-calendar-nav-btn:hover:not(:disabled) {
+  border-color: var(--pbw-color-border-strong, #d1d5db);
+  color: var(--pbw-color-text, #111827);
+}
+.pbw-calendar-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.pbw-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.pbw-calendar-daylabel {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--pbw-color-text-faint, #9ca3af);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-bottom: var(--pbw-space-2, 8px);
+}
+.pbw-calendar-day {
+  position: relative;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--pbw-radius-full, 999px);
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  color: var(--pbw-color-text, #111827);
+  cursor: pointer;
+}
+.pbw-calendar-day:hover:not(:disabled) {
+  background: var(--pbw-color-surface-muted, #f9fafb);
+}
+.pbw-calendar-day:disabled {
+  color: var(--pbw-color-text-faint, #9ca3af);
+  cursor: default;
+}
+.pbw-calendar-day--other-month {
+  visibility: hidden;
+}
+.pbw-calendar-day--today::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--pbw-color-accent, #2563eb);
+}
+.pbw-calendar-day--selected {
+  background: var(--pbw-color-accent, #2563eb) !important;
+  color: var(--pbw-color-accent-contrast, #ffffff) !important;
+  font-weight: 600;
+}
+.pbw-calendar-day--selected.pbw-calendar-day--today::after {
+  background: var(--pbw-color-accent-contrast, #ffffff);
+}
+
+.pbw-timeslots-heading {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pbw-color-text-muted, #6b7280);
+  margin: 0 0 var(--pbw-space-3, 12px);
+}
+.pbw-timeslot-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pbw-space-2, 8px);
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+.pbw-timeslot-button {
+  width: 100%;
+  padding: var(--pbw-space-3, 12px) var(--pbw-space-4, 16px);
+  border: 1px solid var(--pbw-color-border, #e5e7eb);
+  border-radius: var(--pbw-radius-md, 8px);
+  background: var(--pbw-color-surface, #ffffff);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--pbw-color-accent, #2563eb);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+.pbw-timeslot-button:hover {
+  border-color: var(--pbw-color-accent, #2563eb);
+  background: var(--pbw-color-accent-soft, #eff6ff);
+}
+.pbw-empty {
+  font-size: 13px;
+  color: var(--pbw-color-text-muted, #6b7280);
+  padding: var(--pbw-space-4, 16px) 0;
+}
+
+/* --- Details form --- */
+.pbw-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pbw-space-4, 16px);
+  max-width: 420px;
+}
+.pbw-turnstile {
+  margin: 0;
+}
+.pbw-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pbw-color-text-muted, #6b7280);
+  margin-bottom: var(--pbw-space-1, 4px);
+}
+.pbw-field input,
+.pbw-field textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 14px;
+  color: var(--pbw-color-text, #111827);
+  background: var(--pbw-color-surface, #ffffff);
+  border: 1px solid var(--pbw-color-border, #e5e7eb);
+  border-radius: var(--pbw-radius-md, 8px);
+  padding: 10px 12px;
+}
+.pbw-field input:focus,
+.pbw-field textarea:focus {
+  outline: 2px solid var(--pbw-color-accent, #2563eb);
+  outline-offset: -1px;
+  border-color: var(--pbw-color-accent, #2563eb);
+}
+.pbw-field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+.pbw-selected-slot {
+  font-size: 13px;
+  color: var(--pbw-color-text-muted, #6b7280);
+  background: var(--pbw-color-surface-muted, #f9fafb);
+  border-radius: var(--pbw-radius-md, 8px);
+  padding: var(--pbw-space-3, 12px) var(--pbw-space-4, 16px);
+}
+.pbw-selected-slot strong {
+  color: var(--pbw-color-text, #111827);
+}
+
+.pbw-button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--pbw-color-accent-contrast, #ffffff);
+  background: var(--pbw-color-accent, #2563eb);
+  border: none;
+  border-radius: var(--pbw-radius-md, 8px);
+  padding: 11px var(--pbw-space-5, 20px);
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+.pbw-button-primary:hover:not(:disabled) {
+  background: var(--pbw-color-accent-hover, #1d4ed8);
+}
+.pbw-button-primary:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.pbw-alert-error {
+  font-size: 13px;
+  color: var(--pbw-color-danger, #dc2626);
+  background: var(--pbw-color-danger-soft, #fef2f2);
+  border-radius: var(--pbw-radius-md, 8px);
+  padding: var(--pbw-space-3, 12px) var(--pbw-space-4, 16px);
+}
+.pbw-alert-success {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--pbw-color-success, #059669);
+  background: var(--pbw-color-success-soft, #ecfdf5);
+  border-radius: var(--pbw-radius-md, 8px);
+  padding: var(--pbw-space-5, 20px);
+  text-align: center;
+}
+.pbw-book-another {
+  margin-top: var(--pbw-space-4, 16px);
+  width: 100%;
+}
