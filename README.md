@@ -56,8 +56,8 @@ try {
 | `CrenoRateLimitError` | 429 |
 | `BookingApiError` | base class, thrown for network errors, 5xx, anything else |
 
-Matches the [Python](../python-sdk) and [Node](../node-sdk) SDKs' exception taxonomy one-for-one.
+Matches the [Python](https://github.com/whythoughts/creno-python) and [Node](https://github.com/whythoughts/creno-node) SDKs' exception taxonomy one-for-one.
 
 ## License
 
-[MIT](./LICENSE). See [CHANGELOG.md](./CHANGELOG.md) for release history and the repo root's [SECURITY.md](../../SECURITY.md) to report a vulnerability.
+[MIT](./LICENSE). See [CHANGELOG.md](./CHANGELOG.md) for release history and [SECURITY.md](./SECURITY.md) to report a vulnerability.
