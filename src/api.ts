@@ -72,8 +72,8 @@ function errorFor(status: number, message: string, body: unknown): BookingApiErr
 }
 
 // clientLibrary identifies which wrapper is actually rendering this widget
-// (embed script, Vue, WordPress plugin, or this React component used
-// directly), every wrapper ultimately funnels through this one client, so
+// (embed script, Vue, or this React component used directly), every
+// wrapper ultimately funnels through this one client, so
 // this is the one place that needs to know, not each wrapper reimplementing
 // its own fetch calls. Read server-side off X-Client-Library and logged per
 // request (see plugins/public-auth.ts), surfaced in the Control Center so

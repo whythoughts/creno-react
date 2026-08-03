@@ -4,6 +4,13 @@ All notable changes to `@creno/react` are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 versioning follows [SemVer](https://semver.org/).
 
+## [0.1.2] - 2026-08-03
+
+### Changed
+- Dropped the reference to a WordPress plugin from the `clientLibrary` doc
+  comment. It shipped in `dist/types.d.ts`, so editors showed it on hover for
+  a plugin that no longer exists. No API or behaviour change.
+
 ## [0.1.1] - 2026-07-28
 
 ### Changed

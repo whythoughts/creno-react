@@ -60,8 +60,8 @@ export interface BookingWidgetProps {
   onBooked?: (booking: { id: string }) => void;
   /**
    * Identifies which wrapper is rendering this widget (sent as
-   * X-Client-Library on every API call, see api.ts's createApiClient), * "react" by default for direct use of this component; the embed script,
-   * Vue wrapper, and WordPress plugin each override it with their own name.
+   * X-Client-Library on every API call, see api.ts's createApiClient), * "react" by default for direct use of this component; the embed script
+   * and Vue wrapper each override it with their own name.
    */
   clientLibrary?: string;
 }

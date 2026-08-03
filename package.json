@@ -1,6 +1,6 @@
 {
   "name": "@creno/react",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Themeable React booking widget for Creno (https://crenoapp.com): real-time availability, service-type menus, and optional Cloudflare Turnstile bot protection.",
   "license": "MIT",
   "keywords": ["booking", "scheduling", "appointment-scheduling", "react", "calendar", "api-client"],
